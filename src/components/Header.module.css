@@ -1,0 +1,121 @@
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  width: 19.7rem;
+  height: 4rem;
+  background-color: transparent;
+}
+
+.header button {
+  padding: 1.2rem 1.6rem;
+  background-color: var(--neutral-800);
+  font-size: 1.6rem;
+  border: none;
+  color: var(--neutral-100);
+  border-radius: 8px;
+  width: 11.9rem;
+  height: 4.3rem;
+  gap: 10px;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.unitBtn {
+  display: flex;
+}
+
+.header .unitBtn:is(:hover, :focus) {
+  box-shadow: 0px 0px 0px 3px #02012c, 0px 0px 0px 5px #ffffff;
+}
+
+img[alt="units"] {
+  width: 16px;
+  height: 16px;
+}
+
+img[alt="dropdown"] {
+  width: 12px;
+  height: 18px;
+}
+
+.unitDropdown {
+  position: absolute;
+  background-color: var(--neutral-800);
+  border: 1px solid var(--neutral-600);
+  padding: 0.6rem 0.8rem;
+  box-shadow: 0px 8px 16px rgba(2, 1, 44, 0.32);
+  border-radius: 12px;
+  width: 21.4rem;
+  height: 41.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 10;
+  transform: translate(830px, 8vh);
+}
+
+.toggle {
+  font-size: 1.6rem;
+}
+
+.tempUnit {
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--neutral-600);
+  margin-bottom: 0.4rem;
+}
+
+.speedUnit {
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--neutral-600);
+  margin-bottom: 0.4rem;
+}
+
+.unitDropdown span {
+  color: var(--neutral-300);
+  font-size: 1.4rem;
+  font-weight: var(--fw-500);
+  line-height: 120%;
+  margin-left: 0.8rem;
+}
+
+.unitDropdown button {
+  width: 100%;
+  padding: 1rem 0.8rem;
+  gap: 10px;
+  width: 198px;
+  height: 39px;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  line-height: 120%;
+  text-align: left;
+}
+
+@media (max-width: 425px) {
+  .logo {
+    width: 13.79rem;
+    height: 2.8rem;
+  }
+
+  .header button {
+    width: 8.9rem;
+    height: 3.3rem;
+    padding: 0.8rem 1rem;
+    gap: 6px;
+    font-weight: var(--neutral-400);
+    font-size: 1.4rem;
+  }
+  img[alt="units"] {
+    width: 14px;
+    height: 14px;
+  }
+
+  img[alt="dropdown"] {
+    width: 9px;
+    height: 14px;
+  }
+}

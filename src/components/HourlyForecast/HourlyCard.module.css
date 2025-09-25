@@ -1,0 +1,40 @@
+.hourlyCard {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.6rem 1rem 1.2rem;
+  justify-content: space-between;
+  width: 33.6rem;
+  height: 6rem;
+  background-color: var(--neutral-700);
+  border: 1px solid var(--neutral-600);
+  border-radius: 8px;
+}
+
+.time {
+  font-size: 2rem;
+  line-height: 120%;
+  display: flex;
+  align-items: center;
+}
+
+.time p {
+  font-size: 2rem;
+  line-height: 120%;
+}
+
+.hourlyCard img {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 0.8rem;
+}
+
+.hourlyCard .temp {
+  font-size: 2rem;
+  line-height: 120%;
+}
+
+@media (max-width: 1280px) {
+  .hourlyCard {
+    width: 100%;
+  }
+}

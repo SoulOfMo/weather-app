@@ -1,0 +1,29 @@
+.dailyForecastContainer {
+  margin-top: 4.8rem;
+  font-family: var(--ff-dd-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dailyForecastContainer p {
+  line-height: 120%;
+  font-size: 2rem;
+  font-weight: var(--fw-600);
+}
+
+.dailyCards {
+  display: flex;
+  gap: 1.6rem;
+}
+
+@media (max-width: 425px) {
+  .dailyForecastContainer {
+    width: 34.3rem;
+  }
+
+  .dailyCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

@@ -1,0 +1,28 @@
+.detailContainer {
+  border-radius: 12px;
+  width: 18.2rem;
+  height: 11.8rem;
+  padding: 2rem;
+  border: 1px solid var(--neutral-600);
+  background-color: var(--neutral-800);
+}
+
+.detailContainer .detail {
+  color: var(--neutral-200);
+  font-size: 1.8rem;
+  line-height: 120%;
+  text-transform: capitalize;
+}
+
+.detailContainer .value {
+  margin-top: 2.4rem;
+  color: var(--neutral-100);
+  font-size: 3.2rem;
+  line-height: 120%;
+}
+
+@media (max-width: 768px) {
+  .detailContainer {
+    width: 16.5rem;
+  }
+}

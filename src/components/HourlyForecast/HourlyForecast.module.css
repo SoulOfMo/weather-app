@@ -1,0 +1,129 @@
+.hourlyForecastContainer {
+  background-color: var(--neutral-800);
+  width: 38.4rem;
+  height: 69.3rem;
+  color: var(--neutral-100);
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #302f4a var(--neutral-800);
+  scroll-snap-type: proximity;
+  padding-bottom: 2.4rem;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.6rem;
+  position: sticky;
+  top: 0;
+  padding: 2.4rem 2.4rem 0;
+  background-color: var(--neutral-800);
+  opacity: 0.95;
+}
+
+.title p {
+  font-weight: var(--fw-600);
+  font-size: 2rem;
+  line-height: 120%;
+}
+
+select {
+  color: var(--neutral-100);
+  font-size: 1.6rem;
+  font-weight: var(--fw-500);
+  appearance: none;
+  /* background: url("/src/assets/images/icon-dropdown.svg") no-repeat right 1.2rem
+    center; */
+  /* background-size: 1.2rem 1.8rem; */
+}
+
+.title button {
+  font-size: 1.6rem;
+  border: none;
+  background-color: var(--neutral-600);
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  width: 12rem;
+  height: 3.7rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title button img {
+  width: 12px;
+  height: 18px;
+}
+
+.divider {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  height: auto;
+  margin: 2.4rem;
+  height: 59.2rem;
+  scrollbar-width: thin;
+}
+
+.dropdownContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: absolute;
+  top: 70px;
+  left: 15rem;
+  background-color: var(--neutral-800);
+  border: 1px solid var(--neutral-600);
+  max-width: 21.4rem;
+  height: 31.3rem;
+  padding: 0.8rem 0.8rem;
+  color: var(--neutral-100);
+  font-size: 1.6rem;
+  font-weight: var(--fw-500);
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(2, 1, 44, 0.32);
+}
+
+.dropdownContainer button {
+  width: 19.8rem;
+  height: 3.9rem;
+  padding: 1rem 0.8rem;
+  background-color: transparent;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 120%;
+  text-align: left;
+}
+
+button.active {
+  background-color: var(--neutral-700);
+  border-radius: 0.8rem;
+}
+
+@media (max-width: 1280px) {
+  .hourlyForecastContainer {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hourlyForecastContainer {
+    width: 100%;
+    height: auto;
+  }
+
+  .dropdownContainer {
+    left: 10rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .hourlyForecastContainer {
+    height: 68.5rem;
+    overflow-y: scroll;
+    /* padding: 0; */
+  }
+}
