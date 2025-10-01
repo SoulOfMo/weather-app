@@ -56,23 +56,41 @@ img[alt="dropdown"] {
   flex-direction: column;
   align-items: flex-start;
   z-index: 10;
-  transform: translate(830px, 8vh);
+  right: 0;
+  margin-top: 50px;
+  font-weight: var(--fw-500);
 }
 
 .toggle {
   font-size: 1.6rem;
+  width: 19.8rem;
+  height: 3.9rem;
 }
 
-.tempUnit {
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid var(--neutral-600);
-  margin-bottom: 0.4rem;
+.tempUnit,
+.speedUnit,
+.precipitationUnit {
+  width: 19.8rem;
+  height: 11.3rem;
+  padding-top: 0.6rem;
 }
 
-.speedUnit {
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid var(--neutral-600);
-  margin-bottom: 0.4rem;
+.unitDropdown .activeBtn {
+  background-color: var(--neutral-700);
+}
+
+.btnup {
+  margin-top: 0.8rem;
+}
+
+.btnDown {
+  margin-top: 0.4rem;
+}
+
+hr {
+  width: 100%;
+  margin: 0.4rem 0;
+  border: 1px solid var(--neutral-600);
 }
 
 .unitDropdown span {
@@ -86,13 +104,14 @@ img[alt="dropdown"] {
 .unitDropdown button {
   width: 100%;
   padding: 1rem 0.8rem;
-  gap: 10px;
   width: 198px;
   height: 39px;
   border-radius: 8px;
   font-size: 1.6rem;
   line-height: 120%;
   text-align: left;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 425px) {
