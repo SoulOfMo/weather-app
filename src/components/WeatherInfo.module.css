@@ -104,6 +104,7 @@ h2 {
 
   .countryInfo {
     width: 72rem;
+    flex-direction: column;
   }
 }
 
