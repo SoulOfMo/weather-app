@@ -1,38 +1,88 @@
 import styles from "./HourlyForecast.module.css";
-
 import HourlyCard from "./HourlyCard";
 import dropdownIcon from "../../assets/images/icon-dropdown.svg";
+import { useDropdown } from "../../assets/hooks/useDropdown";
+import { useState, useMemo } from "react";
 
-function HourlyForecast() {
+function HourlyForecast({ hourlyData }) {
+  const { open, setOpen, ref } = useDropdown();
+  const [activeDay, setActiveDay] = useState(0);
+
+  // derive loading state
+  const isLoading = !hourlyData;
+
+  // prepare grouped forecast only when data is available
+  const { dailyHourlyForecast, presendDay, days } = useMemo(() => {
+    if (!hourlyData) {
+      return { dailyHourlyForecast: [], presendDay: "_", days: [] };
+    }
+
+    const { time, temperature_2m, weather_code } = hourlyData;
+    const grouped = {};
+
+    time.forEach((t, i) => {
+      const date = new Date(t);
+      const day = date.toLocaleDateString("en-CA");
+
+      const hour = date.toLocaleTimeString("en-us", {
+        hour: "numeric",
+        hour12: true,
+      });
+
+      if (!grouped[day]) grouped[day] = [];
+      grouped[day].push({
+        time: hour,
+        temp: temperature_2m[i],
+        wC: weather_code[i],
+      });
+    });
+
+    const dailyHourlyForecast = Object.entries(grouped)
+      .map(([day, hoursDetails]) => ({ date: day, hoursDetails }))
+      .slice(0);
+
+    const presentDate = new Date(dailyHourlyForecast[activeDay]?.date);
+    const presendDay = presentDate.toLocaleDateString("en-us", {
+      weekday: "long",
+    });
+
+    const days = dailyHourlyForecast.map((day) => {
+      const date = new Date(day.date);
+      return date.toLocaleDateString("en-us", { weekday: "long" });
+    });
+
+    return { dailyHourlyForecast, presendDay, days };
+  }, [hourlyData, activeDay]);
+  console.log(dailyHourlyForecast[0]);
   return (
     <div className={styles.hourlyForecastContainer}>
       <div className={styles.title}>
         <p>Hourly Forecast</p>
-
-        {/* Loop over the day hourly result and each day is put in the option element */}
-        <button>
-          <span>Monday</span>
+        <button onClick={() => setOpen((active) => !active)}>
+          <span>{presendDay}</span>
           <img src={dropdownIcon} alt="" />
         </button>
       </div>
+
       <div className={styles.divider}>
-        {Array.from({ length: 12 }, (_, i) => (
-          <HourlyCard key={i} />
-        ))}
+        {isLoading
+          ? Array.from({ length: 8 }).map((_, i) => (
+              <HourlyCard key={i} isLoading={true} />
+            ))
+          : dailyHourlyForecast[activeDay]?.hoursDetails.map((hour, i) => (
+              <HourlyCard key={i} hourInfo={hour} />
+            ))}
       </div>
 
-      {false && (
-        <div className={styles.dropdownContainer}>
-          <button className={styles.active}>Tuesday</button>
-          <button>Wednesday</button>
-          <button>Thursday</button>
-          <button>Friday</button>
-          <button>Saturday</button>
-          <button>Sunday</button>
-          <button>Monday</button>
+      {open && (
+        <div ref={ref} className={styles.dropdownContainer}>
+          {days.map((day, i) => (
+            <button key={i} onClick={() => setActiveDay(i)}>
+              {day}
+            </button>
+          ))}
         </div>
       )}
-      {/* Loop over the hourly result and each hour is put in the HourlyCard component */}
     </div>
   );
 }

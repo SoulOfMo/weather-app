@@ -12,6 +12,12 @@
   font-weight: var(--fw-500);
 }
 
+.loading {
+  background: linear-gradient(90deg, #3a3a70 25%, #4a4a8a 50%, #3a3a70 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
 .day {
   font-size: 1.8rem;
   line-height: 120%;
@@ -49,5 +55,14 @@
   .dailyItem {
     width: 10.366rem;
     height: 16.5rem;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 }

@@ -1,38 +1,68 @@
 import styles from "./WeatherInfo.module.css";
 
-import sunIcon from "../assets/images/icon-sunny.webp";
 import WeatherDetails from "./WeatherDetails";
 import DailyForecast from "./DailyForecast/DailyForecast";
 import HourlyForecast from "./HourlyForecast/HourlyForecast";
+import { useWeatherContext } from "../contexts/WeatherContext";
+import { weatherIcon } from "./weatherIcon";
 
 function WeatherInfo() {
+  const {
+    country,
+    city,
+    currentTemp,
+    apparentTemp,
+    humidity,
+    wind,
+    precipitation,
+    hourlyData,
+    dailyData,
+    weather,
+  } = useWeatherContext();
   return (
     <div className={styles.weatherInfoContainer}>
       <div className={styles.weatherInfo}>
         <div className={styles.countryInfo}>
           <div className={styles.country}>
-            <h2>Berlin, Germany</h2>
-            <p>Tuesday, April 4, 2025</p>
+            <h2>
+              {city}, {country}
+            </h2>
+            <p>
+              {new Date().toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
           </div>
-
+          {currentTemp.length < 0 && (
+            <div className={`${styles.temp} ${styles.loading}`}>
+              <span className={styles.dot}></span>
+              <span className={styles.dot}></span>
+              <span className={styles.dot}></span>
+              <span>Loading</span>
+            </div>
+          )}
           <div className={styles.temp}>
             <span>
-              <img src={sunIcon} alt="weatherType" />
+              <img src={weatherIcon(weather)} alt="weatherType" />
             </span>
-            <p>20&deg;</p>
+            <p>{Math.floor(currentTemp)}&deg;</p>
           </div>
         </div>
 
         <div className={styles.weatherDetailsContainer}>
-          {Array.from({ length: 4 }, (_, i) => (
-            <WeatherDetails key={i} />
-          ))}
+          <WeatherDetails detail="Feels like" value={apparentTemp} />
+          <WeatherDetails detail="Humidity" value={humidity} />
+          <WeatherDetails detail="Wind" value={wind} />
+          <WeatherDetails detail="Precipitation" value={precipitation} />
         </div>
 
-        <DailyForecast />
+        <DailyForecast dailyData={dailyData} />
       </div>
 
-      <HourlyForecast />
+      <HourlyForecast hourlyData={hourlyData} />
     </div>
   );
 }

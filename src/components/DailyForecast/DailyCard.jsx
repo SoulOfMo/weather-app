@@ -1,13 +1,20 @@
 import styles from "./DailyCard.module.css";
-import cloudIcon from "../../assets/images/icon-rain.webp";
-function DailyCard() {
+
+import { weatherIcon } from "../weatherIcon";
+function DailyCard({ dayInfo, day, isLoading }) {
+  if (isLoading) {
+    return <div className={`${styles.dailyItem} ${styles.loading}`}></div>;
+  }
+
+  const { maxTemp, minTemp, wC } = dayInfo;
+  console.log(dayInfo);
   return (
     <div className={styles.dailyItem}>
-      <span className={styles.day}>Mon</span>
-      <img src={cloudIcon} alt="cloudIcon"></img>
+      <span className={styles.day}>{day}</span>
+      <img src={weatherIcon(wC)} alt="cloudIcon"></img>
       <span className={styles.dailyTemp}>
-        <span className={styles.maxTemp}>14&deg;</span>
-        <span className={styles.minTemp}>20&deg;</span>
+        <span className={styles.maxTemp}>{maxTemp}&deg;</span>
+        <span className={styles.minTemp}>{minTemp}&deg;</span>
       </span>
     </div>
   );

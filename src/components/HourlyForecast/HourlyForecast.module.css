@@ -8,7 +8,6 @@
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: #302f4a var(--neutral-800);
-  scroll-snap-type: proximity;
   padding-bottom: 2.4rem;
 }
 
@@ -44,13 +43,13 @@ select {
   font-size: 1.6rem;
   border: none;
   background-color: var(--neutral-600);
-  padding: 0.8rem 1.6rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 8px;
   width: 12rem;
   height: 3.7rem;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 .title button img {
@@ -66,6 +65,10 @@ select {
   margin: 2.4rem;
   height: 59.2rem;
   scrollbar-width: thin;
+}
+
+.divider > :last-child {
+  margin-bottom: 2.4rem;
 }
 
 .dropdownContainer {
@@ -85,6 +88,8 @@ select {
   font-weight: var(--fw-500);
   border-radius: 12px;
   box-shadow: 0px 8px 16px rgba(2, 1, 44, 0.32);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dropdownContainer button {

@@ -10,6 +10,12 @@
   border-radius: 8px;
 }
 
+.loading {
+  background: linear-gradient(90deg, #3a3a70 25%, #4a4a8a 50%, #3a3a70 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
 .time {
   font-size: 2rem;
   line-height: 120%;
@@ -31,6 +37,15 @@
 .hourlyCard .temp {
   font-size: 2rem;
   line-height: 120%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @media (max-width: 1280px) {
