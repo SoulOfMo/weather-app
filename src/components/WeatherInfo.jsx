@@ -19,37 +19,50 @@ function WeatherInfo() {
     dailyData,
     weather,
   } = useWeatherContext();
+
   return (
     <div className={styles.weatherInfoContainer}>
       <div className={styles.weatherInfo}>
-        <div className={styles.countryInfo}>
-          <div className={styles.country}>
-            <h2>
-              {city}, {country}
-            </h2>
-            <p>
-              {new Date().toLocaleDateString("en-US", {
-                weekday: "long",
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </p>
-          </div>
-          {currentTemp.length < 0 && (
-            <div className={`${styles.temp} ${styles.loading}`}>
-              <span className={styles.dot}></span>
-              <span className={styles.dot}></span>
-              <span className={styles.dot}></span>
+        <div
+          className={`${styles.countryInfo} ${
+            currentTemp.length !== 0 && styles.countryInfoActive
+          } `}
+        >
+          {currentTemp.length < 1 && (
+            <div className={` ${styles.loading}`}>
+              <div className={styles.dots}>
+                <span className={styles.dot}></span>
+                <span className={styles.dot}></span>
+                <span className={styles.dot}></span>
+              </div>
               <span>Loading</span>
             </div>
           )}
-          <div className={styles.temp}>
-            <span>
-              <img src={weatherIcon(weather)} alt="weatherType" />
-            </span>
-            <p>{Math.floor(currentTemp)}&deg;</p>
-          </div>
+
+          {currentTemp.length !== 0 && (
+            <>
+              <div className={styles.country}>
+                <h2>
+                  {city}, {country}
+                </h2>
+                <p>
+                  {new Date().toLocaleDateString("en-US", {
+                    weekday: "long",
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
+              </div>
+
+              <div className={styles.temp}>
+                <span>
+                  <img src={weatherIcon(weather)} alt="weatherType" />
+                </span>
+                <p>{Math.floor(currentTemp)}&deg;</p>
+              </div>
+            </>
+          )}
         </div>
 
         <div className={styles.weatherDetailsContainer}>
