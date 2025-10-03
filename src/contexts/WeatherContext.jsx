@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const initialState = {
   country: "",
@@ -14,10 +8,10 @@ const initialState = {
   error: {},
   pos: { lat: 3.3792, lng: 6.5244 },
   currentTemp: "",
-  apparentTemp: "",
-  humidity: "",
-  wind: "",
-  precipitation: "",
+  apparentTemp: "_",
+  humidity: "_",
+  wind: "_",
+  precipitation: "_",
   hourlyData: "",
   dailyData: "",
   measurementUnit: "metric",
@@ -29,7 +23,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "loading":
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: true };
 
     case "country/city/loaded":
       return { ...state, isLoading: false };
@@ -116,8 +110,6 @@ function WeatherContextProvider({ children }) {
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const [searchInput, setSearchInput] = useState("");
-
   useEffect(() => {
     if (!pos.lat || !pos.lng) return;
 
@@ -126,7 +118,6 @@ function WeatherContextProvider({ children }) {
 
       try {
         const today = new Date().toLocaleDateString("en-CA");
-        console.log(today);
         let endDate = new Date();
         endDate.setDate(new Date().getDate() + 6);
         endDate = endDate.toLocaleDateString("en-CA");
@@ -155,8 +146,6 @@ function WeatherContextProvider({ children }) {
   return (
     <WeatherContext.Provider
       value={{
-        searchInput,
-        setSearchInput,
         country,
         city,
         isLoading,

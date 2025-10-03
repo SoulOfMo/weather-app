@@ -20,7 +20,6 @@ function DailyForecast({ dailyData }) {
 
   const { weather_code, temperature_2m_max, temperature_2m_min, time } =
     dailyData;
-  console.log(dailyData);
 
   const grouped = {};
 
@@ -46,8 +45,6 @@ function DailyForecast({ dailyData }) {
     const date = new Date(day.date);
     return date.toLocaleDateString("en-us", { weekday: "short" });
   });
-
-  console.log(dailyForecast[0].dayDetails[0].maxTemp);
 
   return (
     <div className={styles.dailyForecastContainer}>

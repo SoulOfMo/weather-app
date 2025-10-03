@@ -8,7 +8,6 @@ function HourlyCard({ hourInfo, isLoading }) {
   console.log(hourInfo);
   const { time, temp, wC } = hourInfo;
   if (!hourInfo) return null;
-  // import all the weather icon and implement a code that says if the wc falls btw a range should a specific weather icon
   return (
     <div className={styles.hourlyCard}>
       <div className={styles.time}>
