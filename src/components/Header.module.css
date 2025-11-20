@@ -23,6 +23,7 @@ header {
   gap: 10px;
   align-items: center;
   transition: all 0.5s;
+  font-family: var(--ff-dd-sans);
 }
 
 .unitBtn {
@@ -121,12 +122,17 @@ hr {
   }
 
   .header button {
-    height: 3.3rem;
     padding: 0.8rem 1rem;
     gap: 6px;
     font-weight: var(--neutral-400);
     font-size: 1.4rem;
   }
+
+  .header .unitBtn {
+    width: 8.9rem;
+    height: 3.3rem;
+  }
+
   img[alt="units"] {
     width: 14px;
     height: 14px;
