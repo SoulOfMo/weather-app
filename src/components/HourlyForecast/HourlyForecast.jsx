@@ -53,7 +53,7 @@ function HourlyForecast({ hourlyData }) {
 
     return { dailyHourlyForecast, presendDay, days };
   }, [hourlyData, activeDay]);
-  console.log(dailyHourlyForecast[0]);
+
   return (
     <div className={styles.hourlyForecastContainer}>
       <div className={styles.title}>

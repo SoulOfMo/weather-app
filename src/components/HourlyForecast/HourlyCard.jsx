@@ -5,7 +5,7 @@ function HourlyCard({ hourInfo, isLoading }) {
   if (isLoading) {
     return <div className={`${styles.hourlyCard} ${styles.loading}`}></div>;
   }
-  console.log(hourInfo);
+
   const { time, temp, wC } = hourInfo;
   if (!hourInfo) return null;
   return (

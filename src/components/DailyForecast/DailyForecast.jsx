@@ -3,7 +3,6 @@ import DailyCard from "./DailyCard";
 
 function DailyForecast({ dailyData }) {
   const isLoading = !dailyData;
-  console.log(isLoading);
 
   if (isLoading) {
     return (
@@ -39,7 +38,6 @@ function DailyForecast({ dailyData }) {
     date: day,
     dayDetails,
   }));
-  console.log(dailyForecast[0]);
 
   const days = dailyForecast.map((day) => {
     const date = new Date(day.date);
