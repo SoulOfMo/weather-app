@@ -49,6 +49,9 @@ h2 {
   align-items: center;
   gap: 20px;
 }
+.temp p {
+  transition: all 0.3s ease-in-out;
+}
 
 .loading {
   display: flex;

@@ -3,6 +3,7 @@ import styles from "./WeatherInfo.module.css";
 import WeatherDetails from "./WeatherDetails";
 import DailyForecast from "./DailyForecast/DailyForecast";
 import HourlyForecast from "./HourlyForecast/HourlyForecast";
+
 import { useWeatherContext } from "../contexts/WeatherContext";
 import { weatherIcon } from "./weatherIcon";
 
@@ -17,9 +18,13 @@ function WeatherInfo() {
     precipitation,
     hourlyData,
     dailyData,
-    weather,
+    weatherCode,
+    pos,
+    windSpeedUnit,
+    precipitationUnit,
   } = useWeatherContext();
 
+  if (pos.lat === "" || pos.lng === "") return;
   return (
     <div className={styles.weatherInfoContainer}>
       <div className={styles.weatherInfo}>
@@ -57,7 +62,7 @@ function WeatherInfo() {
 
               <div className={styles.temp}>
                 <span>
-                  <img src={weatherIcon(weather)} alt="weatherType" />
+                  <img src={weatherIcon(weatherCode)} alt="weatherType" />
                 </span>
                 <p>{Math.floor(currentTemp)}&deg;</p>
               </div>
@@ -66,10 +71,23 @@ function WeatherInfo() {
         </div>
 
         <div className={styles.weatherDetailsContainer}>
-          <WeatherDetails detail="Feels like" value={apparentTemp} />
-          <WeatherDetails detail="Humidity" value={humidity} />
-          <WeatherDetails detail="Wind" value={wind} />
-          <WeatherDetails detail="Precipitation" value={precipitation} />
+          <WeatherDetails
+            detail="Feels like"
+            value={Math.floor(apparentTemp)}
+            unit={"°"}
+          />
+          <WeatherDetails detail="Humidity" value={humidity} unit={"%"} />
+
+          <WeatherDetails
+            detail="Wind"
+            value={Math.floor(wind)}
+            unit={` ${windSpeedUnit}`}
+          />
+          <WeatherDetails
+            detail="Precipitation"
+            value={precipitation}
+            unit={` ${precipitationUnit}`}
+          />
         </div>
 
         <DailyForecast dailyData={dailyData} />
