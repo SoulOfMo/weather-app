@@ -10,39 +10,83 @@ function Search() {
   const [searchInput, setSearchInput] = useState("");
   const { dispatch } = useWeatherContext();
   const [results, setResults] = useState([]);
+  const [error, setError] = useState(null);
+
+  // async function searchCity(searchInp) {
+  //   console.log("about to run");
+  //   if (searchInp.length < 3) {
+  //     setResults([]);
+  //     return;
+  //   }
+
+  //   const controller = new AbortController();
+  //   const timeout = setTimeout(() => {
+  //     console.log("timer is done");
+  //     controller.abort();
+  //   }, 10000);
+
+  //   try {
+  //     const res = await fetch(
+  //       `https://geocoding-api.open-meteo.com/v1/search?name=${searchInp}&count=5`,
+  //       { signal: controller.signal }
+  //     );
+
+  //     clearTimeout(timeout);
+  //     console.log(res);
+  //     if (!res.ok) throw new Error("Implement the other screen");
+
+  //     const data = await res.json();
+
+  //     if (data && data.results) {
+  //       setResults(data.results);
+  //     } else {
+  //       return [];
+  //     }
+  //   } catch (err) {
+  //     console.log(err.message);
+
+  //     dispatch({ type: "error", payload: "City can't be found" });
+  //     setResults([]);
+  //   }
+  // }
+
+  async function searchCity(searchInp) {
+    if (searchInp.length < 3) {
+      setResults([]);
+      return;
+    }
+    setError(null);
+    try {
+      const res = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${searchInp}&count=5`
+      );
+
+      if (!res.ok) throw new Error("Implement the other screen");
+
+      const data = await res.json();
+
+      if (data && data.results) {
+        setResults(data.results);
+        setError(null);
+      } else {
+        setError("No results found");
+        setResults([]);
+      }
+    } catch (err) {
+      console.log(err.message);
+
+      dispatch({ type: "error", payload: "City can't be found" });
+      setResults([]);
+    }
+  }
 
   useEffect(() => {
-    async function searchCity(searchInp) {
-      if (searchInp.length < 3) {
-        setResults([]);
-        return;
-      }
-
-      try {
-        const res = await fetch(
-          `https://geocoding-api.open-meteo.com/v1/search?name=${searchInp}&count=5`
-        );
-        const data = await res.json();
-
-        if (data && data.results) {
-          setResults(data.results);
-          console.log(results);
-        } else {
-          return []; // return empty array if no results
-        }
-      } catch (err) {
-        console.error(err);
-        dispatch({ type: "error", payload: "City can't be found" });
-        setResults([]);
-      }
-    }
     searchCity(searchInput);
   }, [searchInput]);
 
-  //show gpt my current code and ask it to guide me not do it on how to implement a searchCity when i click on it
-  // function onSearch(searchInp) {
-
-  // }
+  function handleButtonClick() {
+    searchCity(searchInput);
+  }
 
   return (
     <div className={styles.search}>
@@ -66,6 +110,11 @@ function Search() {
               <span>Search in progress</span>
             </div>
           )}
+          {error && (
+            <div className={styles.searchDropdown}>
+              <span className={styles.error}>{error}</span>
+            </div>
+          )}
           {results.length > 0 && (
             <div className={styles.searchDropdown}>
               {results.map((result) => (
@@ -78,7 +127,6 @@ function Search() {
                     });
                     setSearchInput("");
                     setResults([]);
-                    console.log(result.latitude, result.country);
                   }}
                   className={styles.city}
                 >
@@ -88,7 +136,7 @@ function Search() {
             </div>
           )}
         </div>
-        <button onClick={() => dispatch({})}>Search</button>
+        <button onClick={handleButtonClick}>Search</button>
       </div>
     </div>
   );
