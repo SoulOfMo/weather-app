@@ -12,14 +12,13 @@ export function useDropdown() {
     }
 
     function handleScroll(event) {
-      // Close dropdown if the scroll target is outside the dropdown
       if (ref.current && !ref.current.contains(event.target)) {
         setOpen(false);
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("scroll", handleScroll, true); // capture scroll events
+    window.addEventListener("scroll", handleScroll, true);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

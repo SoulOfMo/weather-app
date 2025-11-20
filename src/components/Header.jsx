@@ -10,6 +10,7 @@ import { useWeatherContext } from "../contexts/WeatherContext";
 
 function Header() {
   const { open, setOpen, ref } = useDropdown();
+
   const {
     measurementUnit,
     dispatch,
@@ -46,10 +47,9 @@ function Header() {
 
           <div className={styles.tempUnit}>
             <span>Temperature</span>
+
             <button
-              onClick={() =>
-                dispatch({ type: "tempUnit/change", payload: "C" })
-              }
+              onClick={() => dispatch({ type: "tempUnit/change" })}
               className={`${styles.btnUp} ${
                 tempUnit === "C" ? styles.activeBtn : ""
               }`}
@@ -76,23 +76,19 @@ function Header() {
           <div className={styles.speedUnit}>
             <span>Wind Speed</span>
             <button
-              onClick={() =>
-                dispatch({ type: "windSpeedUnit/change", payload: "kmh" })
-              }
-              className={`${windSpeedUnit === "kmh" ? styles.activeBtn : ""} ${
+              onClick={() => dispatch({ type: "windSpeedUnit/change" })}
+              className={`${windSpeedUnit === "km/h" ? styles.activeBtn : ""} ${
                 styles.btnUp
               }`}
             >
               km/h
-              {windSpeedUnit === "kmh" && (
+              {windSpeedUnit === "km/h" && (
                 <img src={checkIcon} alt="checkmark" />
               )}
             </button>
 
             <button
-              onClick={() =>
-                dispatch({ type: "windSpeedUnit/change", payload: "mph" })
-              }
+              onClick={() => dispatch({ type: "windSpeedUnit/change" })}
               className={`${windSpeedUnit === "mph" ? styles.activeBtn : ""}  ${
                 styles.btnDown
               } `}
@@ -109,9 +105,7 @@ function Header() {
           <div className={styles.precipitationUnit}>
             <span>Precipitation</span>
             <button
-              onClick={() =>
-                dispatch({ type: "precipitationUnit/change", payload: "mm" })
-              }
+              onClick={() => dispatch({ type: "precipitationUnit/change" })}
               className={`${
                 precipitationUnit === "mm" ? styles.activeBtn : ""
               } ${styles.btnUp}`}
@@ -123,9 +117,7 @@ function Header() {
             </button>
 
             <button
-              onClick={() =>
-                dispatch({ type: "precipitationUnit/change", payload: "in" })
-              }
+              onClick={() => dispatch({ type: "precipitationUnit/change" })}
               className={`${
                 precipitationUnit === "in" ? styles.activeBtn : ""
               }  ${styles.btnDown} `}
