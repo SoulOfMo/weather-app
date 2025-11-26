@@ -131,9 +131,14 @@ h2 {
     width: 34.3rem;
   }
 
+  .country {
+    text-align: center;
+  }
+
   .countryInfo {
     background-image: url("../assets/images/bg-today-small.svg");
     width: 34.3rem;
+    padding-top: 4rem;
   }
 
   .weatherDetailsContainer {
