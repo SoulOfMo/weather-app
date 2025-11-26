@@ -60,6 +60,7 @@ function reducer(state, action) {
         pos: { lat: action.payload.latitude, lng: action.payload.longitude },
         country: action.payload.country,
         city: action.payload.name,
+        isLoading: true,
       };
 
     case "measurementUnit/change": {
@@ -67,8 +68,6 @@ function reducer(state, action) {
 
       // Conversion functions
       const temp = (t) => (toImperial ? (t * 9) / 5 + 32 : (t - 32) * (5 / 9));
-      // const wind = (w) => (toImperial ? w / 1.60934 : w * 1.60934);
-      const precip = (p) => (toImperial ? p / 25.4 : p * 25.4);
 
       const base = state.baseData;
 
@@ -92,7 +91,9 @@ function reducer(state, action) {
         currentTemp: temp(state.currentTemp),
         apparentTemp: temp(state.apparentTemp),
         wind: toImperial ? base.wind / 1.60934 : base.wind,
-        precipitation: precip(state.precipitation),
+        precipitation: toImperial
+          ? base.precipitation / 25.4
+          : base.precipitation,
         hourlyData: hourlyConverted,
         dailyData: dailyConverted,
         measurementUnit:
@@ -134,7 +135,6 @@ function reducer(state, action) {
     }
 
     case "windSpeedUnit/change": {
-      // const base = state.baseData;
       const convertWind = (w) =>
         state.windSpeedUnit === "km/h" ? w / 1.60934 : w * 1.60934;
 
@@ -145,11 +145,15 @@ function reducer(state, action) {
       };
     }
 
-    case "precipitationUnit/change":
+    case "precipitationUnit/change": {
+      const convertPrecip = (p) =>
+        state.precipitationUnit === "mm" ? p / 25.4 : p * 25.4;
       return {
         ...state,
         precipitationUnit: state.precipitationUnit === "mm" ? "in" : "mm",
+        precipitation: convertPrecip(state.precipitation),
       };
+    }
 
     case "error":
       return { ...state, isLoading: false, error: action.payload };
