@@ -1,16 +1,14 @@
 import styles from "./DailyForecast.module.css";
 import DailyCard from "./DailyCard";
 
-function DailyForecast({ dailyData }) {
-  const isLoading = !dailyData;
-
+function DailyForecast({ dailyData, isLoading }) {
   if (isLoading) {
     return (
       <div className={styles.dailyForecastContainer}>
         <p>Daily forecast</p>
         <div className={styles.dailyCards}>
           {Array.from({ length: 7 }).map((_, i) => (
-            <DailyCard key={i} go="ay0" isLoading={true} />
+            <DailyCard key={i} isLoading={isLoading} />
           ))}
         </div>
       </div>

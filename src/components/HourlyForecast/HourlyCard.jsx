@@ -3,7 +3,7 @@ import { weatherIcon } from "../weatherIcon";
 
 function HourlyCard({ hourInfo, isLoading }) {
   if (isLoading) {
-    return <div className={`${styles.hourlyCard} ${styles.loading}`}></div>;
+    return <div className={`${styles.hourlyCard} loading`}></div>;
   }
 
   const { time, temp, wC } = hourInfo;

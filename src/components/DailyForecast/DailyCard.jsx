@@ -3,7 +3,7 @@ import styles from "./DailyCard.module.css";
 import { weatherIcon } from "../weatherIcon";
 function DailyCard({ dayInfo, day, isLoading }) {
   if (isLoading) {
-    return <div className={`${styles.dailyItem} ${styles.loading}`}></div>;
+    return <div className={`${styles.dailyItem} loading`}></div>;
   }
 
   const { maxTemp, minTemp, wC } = dayInfo;

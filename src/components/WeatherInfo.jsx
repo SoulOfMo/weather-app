@@ -22,6 +22,7 @@ function WeatherInfo() {
     pos,
     windSpeedUnit,
     precipitationUnit,
+    isLoading,
   } = useWeatherContext();
 
   if (pos.lat === "" || pos.lng === "") return;
@@ -30,10 +31,10 @@ function WeatherInfo() {
       <div className={styles.weatherInfo}>
         <div
           className={`${styles.countryInfo} ${
-            currentTemp.length !== 0 && styles.countryInfoActive
+            !isLoading && styles.countryInfoActive
           } `}
         >
-          {currentTemp.length < 1 && (
+          {isLoading && (
             <div className={` ${styles.loading}`}>
               <div className={styles.dots}>
                 <span className={styles.dot}></span>
@@ -44,7 +45,7 @@ function WeatherInfo() {
             </div>
           )}
 
-          {currentTemp.length !== 0 && (
+          {!isLoading && (
             <>
               <div className={styles.country}>
                 <h2>
@@ -75,25 +76,33 @@ function WeatherInfo() {
             detail="Feels like"
             value={Math.floor(apparentTemp)}
             unit={"°"}
+            isLoading={isLoading}
           />
-          <WeatherDetails detail="Humidity" value={humidity} unit={"%"} />
+          <WeatherDetails
+            detail="Humidity"
+            value={humidity}
+            unit={"%"}
+            isLoading={isLoading}
+          />
 
           <WeatherDetails
             detail="Wind"
             value={Math.floor(wind)}
             unit={` ${windSpeedUnit}`}
+            isLoading={isLoading}
           />
           <WeatherDetails
             detail="Precipitation"
-            value={precipitation}
+            value={Math.round(precipitation * 100) / 100}
             unit={` ${precipitationUnit}`}
+            isLoading={isLoading}
           />
         </div>
 
-        <DailyForecast dailyData={dailyData} />
+        <DailyForecast dailyData={dailyData} isLoading={isLoading} />
       </div>
 
-      <HourlyForecast hourlyData={hourlyData} />
+      <HourlyForecast hourlyData={hourlyData} isLoading={isLoading} />
     </div>
   );
 }

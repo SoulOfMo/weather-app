@@ -4,12 +4,9 @@ import dropdownIcon from "../../assets/images/icon-dropdown.svg";
 import { useDropdown } from "../../assets/hooks/useDropdown";
 import { useState, useMemo } from "react";
 
-function HourlyForecast({ hourlyData }) {
+function HourlyForecast({ hourlyData, isLoading }) {
   const { open, setOpen, ref } = useDropdown();
   const [activeDay, setActiveDay] = useState(0);
-
-  // derive loading state
-  const isLoading = !hourlyData;
 
   // prepare grouped forecast only when data is available
   const { dailyHourlyForecast, presendDay, days } = useMemo(() => {
@@ -77,7 +74,13 @@ function HourlyForecast({ hourlyData }) {
       {open && (
         <div ref={ref} className={styles.dropdownContainer}>
           {days.map((day, i) => (
-            <button key={i} onClick={() => setActiveDay(i)}>
+            <button
+              key={i}
+              onClick={() => {
+                setActiveDay(i);
+                setOpen(!open);
+              }}
+            >
               {day}
             </button>
           ))}
